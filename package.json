@@ -1,0 +1,12 @@
+{
+  "name": "e-commerce-marketplace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "server": "yarn --cwd backend run watch",
+    "client": "yarn --cwd frontend run dev",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+  }
+}
