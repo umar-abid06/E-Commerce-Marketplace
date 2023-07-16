@@ -4,7 +4,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../assets/styles/index";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [visible, setVisible] = useState(false);
 
   const {
@@ -22,12 +22,37 @@ const Login = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Login To Your Account
+          Register As A New User
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Full Name
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="fullName"
+                  autoComplete="fullName"
+                  // required
+                  {...register("fullName", { required: true })}
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
+                  className=" appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                {errors.fullName && (
+                  <span className=" text-red-600 mt-1">
+                    This field is required
+                  </span>
+                )}
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="email"
@@ -92,32 +117,46 @@ const Login = () => {
                 )}
               </div>
             </div>
-            <div className={`${styles.normalFlex} justify-between`}>
-              <div className={`${styles.normalFlex} `}>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Confirm Password
+              </label>
+              <div className="mt-1 relative">
                 <input
-                  type="checkbox"
-                  name="remember-me"
-                  id="remember-me"
-                  defaultValue={true}
-                  {...register("remember-me")}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  type={visible ? "text" : "password"}
+                  name="password"
+                  autoComplete="current-password"
+                  // required
+                  {...register("confirmPassword", { required: true })}
+                  // value={password}
+                  // onChange={(e) => setPassword(e.target.value)}
+                  className=" appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-              <div className="text-sm">
-                <a
-                  href=".forgot-password"
-                  className="font-medium text-blue-600 hover:text-blue-500 "
-                >
-                  Forgot Your Password?
-                </a>
+
+                {errors.password && (
+                  <span className=" text-red-600 mt-1">
+                    This field is required
+                  </span>
+                )}
+                {visible ? (
+                  <AiOutlineEye
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisible(false)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisible(true)}
+                  />
+                )}
               </div>
             </div>
+
             <div>
               <button
                 type="submit"
@@ -127,9 +166,9 @@ const Login = () => {
               </button>
             </div>
             <div className={`${styles.normalFlex} w-full `}>
-              <h4>{"Don't Have An Account?"}</h4>
-              <Link to="/sign-up" className="text-blue-600 pl-2">
-                Sign Up
+              <h4>{"Already Have An Account?"}</h4>
+              <Link to="/login" className="text-blue-600 pl-2">
+                Log In
               </Link>
             </div>
           </form>
@@ -139,4 +178,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
