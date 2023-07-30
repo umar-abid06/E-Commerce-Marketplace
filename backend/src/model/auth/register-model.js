@@ -1,5 +1,5 @@
-const UserModel = require("./User");
-const UserVerificationModel = require("./UserVerification");
+const UserModel = require("./register.user-mongo");
+const UserVerificationModel = require("./register.user.verification-mongo");
 
 async function getExistedUser(email) {
   const existedUser = await UserModel.findOne({ email });

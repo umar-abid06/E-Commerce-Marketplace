@@ -1,4 +1,4 @@
-const UserModel = require("../../../model/auth/User");
+const UserModel = require("../../../model/auth/register.user-mongo");
 const path = require("path");
 const {
   getExistedUser,
@@ -12,22 +12,43 @@ const {
   sendVerificationEmail,
 } = require("../../../services/verificationEmail-service");
 const bcrypt = require("bcrypt");
+const {
+  isEmailValid,
+  isPasswordValid,
+} = require("../../../config/validation-config");
 
-async function httpGetAllUsers(req, res) {
+async function httpRegisterUser(req, res) {
   const { name, email, password } = req.body;
 
-  const existedUser = await getExistedUser(email);
-  if (existedUser) {
-    return res
-      .status(401)
-      .json({ message: "Account Already Exists With This Email" });
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: "Missing Credentials" });
   }
-  const newUser = await createNewUser(name, email, password);
-  const emailResponse = await sendVerificationEmail(newUser._id, newUser.email);
-  return res.status(200).json({
-    message: emailResponse.message,
-    data: newUser,
-    payload: emailResponse.payload,
+
+  if (isEmailValid(email) && isPasswordValid(password)) {
+    const existedUser = await getExistedUser(email);
+    if (existedUser) {
+      return res
+        .status(401)
+        .json({ message: "Account Already Exists With This Email" });
+    }
+    const newUser = await createNewUser(name, email, password);
+    const emailResponse = await sendVerificationEmail(
+      newUser._id,
+      newUser.email
+    );
+    return res.status(200).json({
+      message: emailResponse.message,
+      data: newUser,
+      payload: emailResponse.payload,
+    });
+  }
+  return res.status(400).json({
+    message: "Invalid Email Or Password",
+    passDetails: [
+      "Password should be atleast 6 characters",
+      "Must Include A Capital Letter",
+      "Must Include Especial Charater like *,/@,#,_",
+    ],
   });
 }
 
@@ -85,6 +106,6 @@ async function httpVerifyUser(req, res) {
 }
 
 module.exports = {
-  httpGetAllUsers,
+  httpRegisterUser,
   httpVerifyUser,
 };

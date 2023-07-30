@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
-const UserVerificationModel = require("../model/auth/UserVerification");
+const UserVerificationModel = require("../model/auth/register.user.verification-mongo");
 
 async function sendVerificationEmail(_id, email) {
   // Create a transporter using Nodemailer
