@@ -20,13 +20,11 @@ async function httpLoginUser(req, res) {
   }
 
   if (!user.verified || user.verified === false) {
-    return res
-      .status(400)
-      .json({
-        message: "Email hasn't been Verified!",
-        detail:
-          "Check Your Mailbox To Verify Your Account Or Again Register Your Account!",
-      });
+    return res.status(400).json({
+      message: "Email hasn't been Verified!",
+      detail:
+        "Check Your Mailbox To Verify Your Account Or Again Register Your Account!",
+    });
   }
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.sign(
@@ -37,8 +35,16 @@ async function httpLoginUser(req, res) {
       JWT_SECRET
     );
     console.log(token);
+
+    const options = {
+      expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    };
     return res
       .status(200)
+      .cookie("token", token, options)
       .json({ message: "Logged In Successfully!", data: token });
   }
   return res.status(400).json({ message: "Invalid Email or Password" });

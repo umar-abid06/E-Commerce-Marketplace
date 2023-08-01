@@ -24,14 +24,15 @@ async function httpRegisterUser(req, res) {
     return res.status(400).json({ message: "Missing Credentials" });
   }
 
+  const existedUser = await getExistedUser(email);
+  if (existedUser) {
+    return res
+      .status(401)
+      .json({ message: "Account Already Exists With This Email" });
+  }
   if (isEmailValid(email) && isPasswordValid(password)) {
-    const existedUser = await getExistedUser(email);
-    if (existedUser) {
-      return res
-        .status(401)
-        .json({ message: "Account Already Exists With This Email" });
-    }
     const newUser = await createNewUser(name, email, password);
+
     const emailResponse = await sendVerificationEmail(
       newUser._id,
       newUser.email
@@ -94,7 +95,8 @@ async function httpVerifyUser(req, res) {
         const deletedEmailData = await deleteVerificationEmail(userId);
 
         if (deletedEmailData.acknowledged === true) {
-          res.sendFile(path.join(__dirname, "../../../view/verification.html"));
+          // res.sendFile(path.join(__dirname, "../../../view/verification.html"));
+          res.redirect("http://127.0.0.1:5173/activation");
         }
       }
     } else {
