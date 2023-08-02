@@ -21,14 +21,18 @@ async function httpRegisterUser(req, res) {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    return res.status(400).json({ message: "Missing Credentials" });
+    return res
+      .status(400)
+      .json({ status: "ERROR", message: "Missing Credentials" });
   }
 
   const existedUser = await getExistedUser(email);
   if (existedUser) {
-    return res
-      .status(401)
-      .json({ message: "Account Already Exists With This Email" });
+    return res.status(401).json({
+      status: "ERROR",
+      message: "Account Already Exists With This Email",
+      data: "Login Instead!",
+    });
   }
   if (isEmailValid(email) && isPasswordValid(password)) {
     const newUser = await createNewUser(name, email, password);
@@ -38,14 +42,15 @@ async function httpRegisterUser(req, res) {
       newUser.email
     );
     return res.status(200).json({
+      status: "SUCCESS",
       message: emailResponse.message,
       data: newUser,
-      payload: emailResponse.payload,
     });
   }
   return res.status(400).json({
+    status: "ERROR",
     message: "Invalid Email Or Password",
-    passDetails: [
+    data: [
       "Password should be atleast 6 characters",
       "Must Include A Capital Letter",
       "Must Include Especial Charater like *,/@,#,_",

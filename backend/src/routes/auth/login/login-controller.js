@@ -7,23 +7,30 @@ async function httpLoginUser(req, res) {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "Missing Credentials" });
+    return res
+      .status(400)
+      .json({
+        status: "ERROR",
+        message: "Missing Credentials",
+        data: "Kindly Enter Correct & Complete Credentials!",
+      });
   }
 
   const user = await getExistedUser(email);
 
   if (!user) {
     return res.status(400).json({
+      status: "ERROR",
       message: "This User does not Exist!",
-      detail: "Sign Up Instead!",
+      data: "Sign Up Instead!",
     });
   }
 
   if (!user.verified || user.verified === false) {
     return res.status(400).json({
+      status: "ERROR",
       message: "Email hasn't been Verified!",
-      detail:
-        "Check Your Mailbox To Verify Your Account Or Again Register Your Account!",
+      data: "Check Your Mailbox To Verify Your Account Or Again Register Your Account!",
     });
   }
   if (await bcrypt.compare(password, user.password)) {
@@ -45,9 +52,19 @@ async function httpLoginUser(req, res) {
     return res
       .status(200)
       .cookie("token", token, options)
-      .json({ message: "Logged In Successfully!", data: token });
+      .json({
+        status: "SUCCESS",
+        message: "Logged In Successfully!",
+        token: token,
+        data: {
+          name: user.name,
+          email: user.email,
+        },
+      });
   }
-  return res.status(400).json({ message: "Invalid Email or Password" });
+  return res
+    .status(400)
+    .json({ status: "ERROR", message: "Invalid Email or Password" });
 }
 
 module.exports = {

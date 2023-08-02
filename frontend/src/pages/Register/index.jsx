@@ -1,18 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { registerSchema } from "../../utils/functions/validation.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userSignup } from "../../features/user/userRegister-slice.js";
 
 const Register = () => {
-  const [visible, setVisible] = useState(false);
-  const [res, setRes] = useState();
-  const navigate = useNavigate();
-
   const {
     control,
     handleSubmit,
@@ -20,51 +17,95 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
+  const [visible, setVisible] = useState(false);
+  const [res, setRes] = useState();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.userRegistration);
+  const { status, isLoading, isError, message, data } = user;
+
+  console.log(status, isLoading, isError, message, data);
+  if (!isError && message) {
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }
+  if (isError && message) {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }
+  const redirect = location.search ? location.search.split("=")[1] : "/login";
+
+  useEffect(() => {
+    if (status === "SUCCESS") {
+      setTimeout(() => {
+        navigate(redirect);
+      }, 4000);
+    }
+  }, [navigate, redirect]);
   const onSubmit = async (data) => {
     // Handle form submission here
 
     console.log(data);
-    await axios
-      .post("http://192.168.0.151:8000/api/v1/auth/register", data, {
-        "Content-Type": "application/json", // Example: JSON data
-        // You can add other headers here as needed
-      })
-      .then((response) => {
-        console.log("Data posted successfully:", response.data);
+    dispatch(userSignup(data));
 
-        toast.success(response.data.message, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
-      })
-      .catch((error) => {
-        console.error("Error posting data:", error);
-        console.log(error.response.data.message);
-        setRes(error.response.data.passDetails);
-        console.log(res);
-        toast.error(error.response.data.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+    // await axios
+    //   .post("http://192.168.0.151:8000/api/v1/auth/register", data, {
+    //     "Content-Type": "application/json", // Example: JSON data
+    //     // You can add other headers here as needed
+    //   })
+    //   .then((response) => {
+    //     console.log("Data posted successfully:", response.data);
 
-        // Handle errors here
-      });
+    //     toast.success(response.data.message, {
+    //       position: "top-center",
+    //       autoClose: 3000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "dark",
+    //     });
+    //     setTimeout(() => {
+    //       navigate("/login");
+    //     }, 5000);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error posting data:", error);
+    //     console.log(error.response.data.message);
+    //     setRes(error.response.data.passDetails);
+    //     console.log(res);
+    //     toast.error(error.response.data.message, {
+    //       position: "top-center",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "dark",
+    //     });
+
+    //     // Handle errors here
+    //   });
   };
 
   return (
