@@ -8,7 +8,7 @@
 
 * {
   scroll-behavior: smooth;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

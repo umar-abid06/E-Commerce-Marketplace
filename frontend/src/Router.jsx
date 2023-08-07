@@ -1,43 +1,27 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import FallbackComponent from "./utils/FallbackComponent";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 import AccountActivation from "./pages/Account-Activation";
-import ProtectedRoute from "./utils/ProtectedRoute";
-import { useSelector } from "react-redux";
+
+const Register = React.lazy(() => import("./pages/Register"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Home = React.lazy(() => import("./pages/Home"));
+const App = React.lazy(() => import("./App"));
 
 const Router = () => {
-  const isAuthenticated = useSelector(
-    (state) => state.userLogin.isAuthenticated
-  );
-  console.log(isAuthenticated);
-  const routes = [
-    {
-      path: "/",
-      element: <App />,
-      //   loader: rootLoader,
-      children: [],
-    },
-    {
-      path: "login",
-      element: <Login />,
-      //   loader: rootLoader,
-      children: [],
-    },
-    {
-      path: "sign-up",
-      element: <ProtectedRoute component={<Register />} />,
-      // loader: teamLoader,
-    },
-    {
-      path: "/activation",
-      element: <AccountActivation />,
-      //   loader: rootLoader,
-      children: [],
-    },
-  ];
-  const router = createBrowserRouter(routes);
-  return <RouterProvider router={router} />;
-};
+  return (
+    <Suspense fallback={<FallbackComponent />}>
+      <Routes>
+        <Route element={<ProtectedRoutes />}>
+          <Route element={<Home />} path="/home" exact />
+        </Route>
 
+        <Route element={<Login />} path="/login" />
+        <Route element={<Register />} path="/register" />
+        <Route element={<AccountActivation />} path="/activation" />
+      </Routes>
+    </Suspense>
+  );
+};
 export default Router;

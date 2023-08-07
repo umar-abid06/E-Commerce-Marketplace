@@ -20,6 +20,7 @@ const userLoginSlice = createSlice({
   reducers: {
     userLogout: (state) => {
       state.data = null;
+      state.token = Cookies.remove("Token");
       // localStorage.removeItem("loggedInUser");
       // window.location.href = "/";
     },
