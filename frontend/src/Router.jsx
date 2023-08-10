@@ -7,7 +7,6 @@ import AccountActivation from "./pages/Account-Activation";
 const Register = React.lazy(() => import("./pages/Register"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Home = React.lazy(() => import("./pages/Home"));
-const App = React.lazy(() => import("./App"));
 
 const Router = () => {
   return (

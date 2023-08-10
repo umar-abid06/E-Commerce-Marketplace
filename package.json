@@ -8,8 +8,5 @@
     "server": "yarn --cwd backend run watch",
     "client": "yarn --cwd frontend run dev",
     "dev": "concurrently \"yarn run server\" \"yarn run client\""
-  },
-  "devDependencies": {
-    "daisyui": "^3.5.1"
   }
 }
