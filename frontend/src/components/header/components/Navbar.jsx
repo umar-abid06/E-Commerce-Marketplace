@@ -1,4 +1,5 @@
 import { VscAccount } from "react-icons/vsc";
+import { categoriesData } from "../../../data";
 const Navbar = () => {
   return (
     <div className="navbar bg-primary text-primary-content">
@@ -23,14 +24,14 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black "
             >
               <li>
                 <a>Home</a>
               </li>
               <li>
                 <a>Categories</a>
-                <ul className="p-2 text-gray-700">
+                <ul className="p-2 text-gray-700 z-10">
                   <li>
                     <a>Wear</a>
                   </li>
@@ -50,25 +51,26 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a className="btn btn-ghost normal-case text-xl">Marketplace</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal  px-1 font-bold">
+          <ul className="menu menu-horizontal  px-1 font-bold z-10">
             <li>
               <a>Home</a>
             </li>
             <li tabIndex={0}>
               <details>
                 <summary>Categories</summary>
-                <ul className="p-2 text-gray-700 ">
+                <ul className="px-2  text-gray-700">
+                  {categoriesData.slice(6).map((category) => (
+                    <>
+                      <li>
+                        <a>{category.title}</a>
+                      </li>
+                    </>
+                  ))}
                   <li>
-                    <a>Wear</a>
-                  </li>
-                  <li>
-                    <a>Electronics</a>
-                  </li>
-                  <li>
-                    <a>Crockery</a>
+                    <a>More...</a>
                   </li>
                 </ul>
               </details>
