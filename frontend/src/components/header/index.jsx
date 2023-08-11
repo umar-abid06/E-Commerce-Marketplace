@@ -42,7 +42,7 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           <a className="btn btn-outline bg-slate-900  text-gray-200">
-            Become a Teacher
+            Become a Seller
           </a>
         </div>
       </div>
