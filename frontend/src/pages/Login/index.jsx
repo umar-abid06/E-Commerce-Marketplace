@@ -56,6 +56,7 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       navigate("/home");
+      window.location.reload();
     }
   }, [navigate, token]);
   const onSubmit = async (data) => {

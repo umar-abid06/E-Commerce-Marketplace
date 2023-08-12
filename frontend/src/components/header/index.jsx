@@ -1,47 +1,32 @@
 import Navbar from "./components/Navbar";
-import { ImSearch } from "react-icons/im";
-import { useState } from "react";
+import { BsSearch } from "react-icons/bs";
+
 const Header = () => {
-  const [active, setActive] = useState(false);
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 90) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  });
   return (
     <>
-      <div
-        className={`navbar bg-base-100 ${
-          active ? "shadow-sm fixed top-0 left-0 z-10 bg-black" : null
-        } `}
-      >
+      <div className={`navbar h-[50px]  `}>
         <div className="navbar-start ">
           <a
-            className={`btn btn-ghost normal-case text-2xl font-bold ${
-              active ? "text-white" : null
-            }`}
+            className={`btn btn-ghost normal-case text-lg mr-2 md:text-2xl font-bold  `}
           >
             ECM
           </a>
         </div>
-        <div className="join w-full ">
-          <div className="form-control w-full">
+        <div className=" navbar-center  w-[180px] sm:w-[320px] md:w-[540px] lg:w-[728px] ">
+          <div className="form-control w-full relative -ml-3 md:-ml-0">
             <input
               type="text"
               placeholder="Search"
-              className="input input-bordered hover:border-slate-600  "
+              className="input input-bordered hover:border-slate-600 h-10"
             />
-          </div>
-          <div className="indicator">
-            <button className="btn btn-primary -ml-2 join-item ">
-              <ImSearch size={17} />
-            </button>
+            <BsSearch
+              size={24}
+              className="cursor-pointer absolute right-4 top-2 z-10 "
+            />
           </div>
         </div>
         <div className="navbar-end">
-          <a className="btn btn-outline bg-slate-900  text-gray-200">
+          <a className="btn btn-outline bg-slate-900  text-gray-200 text-[11px] md:text-sm w-[90px]  sm:w-[120px] md:w-[140px] lg:w-[160px]">
             Become a Seller
           </a>
         </div>

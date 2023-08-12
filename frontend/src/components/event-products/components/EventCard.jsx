@@ -1,10 +1,15 @@
+/* eslint-disable react/prop-types */
 import styles from "../../../assets/styles";
 import CountDown from "./CountDown";
 // import { Link } from "react-router-dom";
 
-const EventCard = () => {
+const EventCard = ({ active }) => {
   return (
-    <div className={`w-full block bg-white rounded-lg lg:flex p-2`}>
+    <div
+      className={`w-full block bg-white rounded-lg ${
+        active ? "unset" : "mb-12"
+      } lg:flex p-2`}
+    >
       <div className="w-full lg:-w[50%] m-auto">
         <img src="https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg" alt="" />
       </div>

@@ -3,6 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import FallbackComponent from "./utils/FallbackComponent";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import AccountActivation from "./pages/Account-Activation";
+import ProductsPage from "./pages/Products";
+import BestSellingPage from "./pages/Best-Selling";
+import EventsPage from "./pages/Events";
+import FAQPage from "./pages/FAQ";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Login = React.lazy(() => import("./pages/Login"));
@@ -14,6 +18,10 @@ const Router = () => {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route element={<Home />} path="/home" exact />
+          <Route element={<ProductsPage />} path="/products" />
+          <Route element={<BestSellingPage />} path="/best-selling" />
+          <Route element={<EventsPage />} path="/events" />
+          <Route element={<FAQPage />} path="/faq" />
         </Route>
 
         <Route element={<Login />} path="/login" />

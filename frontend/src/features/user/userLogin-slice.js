@@ -21,8 +21,8 @@ const userLoginSlice = createSlice({
     userLogout: (state) => {
       state.data = null;
       state.token = Cookies.remove("Token");
+      window.location.href = "/login";
       // localStorage.removeItem("loggedInUser");
-      // window.location.href = "/";
     },
   },
   extraReducers: {

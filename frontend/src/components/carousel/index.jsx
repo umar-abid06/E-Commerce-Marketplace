@@ -32,7 +32,7 @@ const heroData = [
 
 const Carousel = () => {
   return (
-    <div className="carousel w-full mx-12 h-[520px] ">
+    <div className="carousel w-full mx-4 lg:mx-12 h-[420px] sm:h-[420px] md:h-[460px] lg:h-[520px] ">
       <div id="slide1" className="carousel-item relative w-full ">
         <Hero
           img={heroData[0].img}
