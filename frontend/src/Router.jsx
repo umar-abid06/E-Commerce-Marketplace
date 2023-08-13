@@ -7,6 +7,7 @@ import ProductsPage from "./pages/Products";
 import BestSellingPage from "./pages/Best-Selling";
 import EventsPage from "./pages/Events";
 import FAQPage from "./pages/FAQ";
+import ProductDetailsPage from "./pages/Product-Details";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Login = React.lazy(() => import("./pages/Login"));
@@ -19,6 +20,7 @@ const Router = () => {
         <Route element={<ProtectedRoutes />}>
           <Route element={<Home />} path="/home" exact />
           <Route element={<ProductsPage />} path="/products" />
+          <Route element={<ProductDetailsPage />} path="/products/:name" />
           <Route element={<BestSellingPage />} path="/best-selling" />
           <Route element={<EventsPage />} path="/events" />
           <Route element={<FAQPage />} path="/faq" />

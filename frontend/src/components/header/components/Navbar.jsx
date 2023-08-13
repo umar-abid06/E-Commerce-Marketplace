@@ -3,17 +3,40 @@ import { categoriesData } from "../../../data";
 import { Link } from "react-router-dom";
 import { userLogout } from "../../../features/user/userLogin-slice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { HiOutlineBell } from "react-icons/hi";
+import { useEffect, useState } from "react";
+
+import {
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+  // AiOutlineSearch,
+} from "react-icons/ai";
+
+import { IoIosArrowDown } from "react-icons/io";
+
+import DropDown from "../../dropdown";
+import Cart from "../../cart";
+import Wishlist from "../../wishlist";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [categoryShow, setCategoryShow] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishlist, setOpenWishlist] = useState(false);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(userLogout());
   };
+
+  // console.log(windowWidth);
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    if (windowWidth > 450) {
+      setCategoryShow(true);
+    }
+  }, [windowWidth, categoryShow]);
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 75) {
@@ -57,17 +80,7 @@ const Navbar = () => {
               <li>
                 <Link to={"/best-selling"}>Best Selling</Link>
               </li>
-              <li>
-                <a>Categories</a>
-                <ul className="p-2 text-gray-700 z-10">
-                  <li>
-                    <a>Wear</a>
-                  </li>
-                  <li>
-                    <a>Electronics</a>
-                  </li>
-                </ul>
-              </li>
+
               <li>
                 <Link to={"/products"}>Products</Link>
               </li>
@@ -79,9 +92,31 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-lg md:text-xl">
-            Marketplace
-          </a>
+          {categoryShow ? (
+            <div
+              onClick={() => setDropDown(!dropDown)}
+              className="relative normal-case w-[240px] h-[40px] text-center bg-neutral rounded-md flex justify-center items-center cursor-pointer ml-6 font-bold"
+            >
+              All Categories
+              <IoIosArrowDown
+                size={20}
+                className="absolute right-2 top-2 cursor-pointer "
+                onClick={() => setDropDown(!dropDown)}
+              />
+              <div className="">
+                {dropDown ? (
+                  <DropDown
+                    categoriesData={categoriesData}
+                    setDropDown={setDropDown}
+                  />
+                ) : null}
+              </div>
+            </div>
+          ) : (
+            <a className="btn btn-ghost normal-case text-lg md:text-xl">
+              Marketplace
+            </a>
+          )}
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal  px-1 font-bold z-10">
@@ -91,23 +126,7 @@ const Navbar = () => {
             <li>
               <Link to={"/best-selling"}>Best Selling</Link>
             </li>
-            <li tabIndex={0}>
-              <details>
-                <summary>Categories</summary>
-                <ul className="px-2  text-gray-700">
-                  {categoriesData.slice(0, 5).map((category) => (
-                    <>
-                      <li>
-                        <a>{category.title}</a>
-                      </li>
-                    </>
-                  ))}
-                  <li>
-                    <a>More...</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
+
             <li>
               <Link to={"/products"}>Products</Link>
             </li>
@@ -120,35 +139,27 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+          <div
+            className="dropdown dropdown-end"
+            onClick={() => setOpenWishlist(true)}
+          >
             <label tabIndex={0} className="btn btn-ghost btn-circle -mr-3">
               <div className="indicator">
-                <HiOutlineBell size={22} />
+                <AiOutlineHeart size={22} />
                 <span
-                  className={`badge badge-xs ${
-                    active ? " badge-neutral text-white" : "badge-info"
-                  } indicator-item`}
-                ></span>
+                  className={`badge badge-sm text-white ${
+                    active ? " badge-neutral " : "badge-info"
+                  } indicator-item `}
+                >
+                  4
+                </span>
               </div>
             </label>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg text-gray-700">
-                  4 Notifications
-                </span>
-                <span className="text-info">ABC Firm: Dear Customer, ...</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block ">
-                    See More
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
-          <div className="dropdown dropdown-end">
+          <div
+            className="dropdown dropdown-end"
+            onClick={() => setOpenCart(true)}
+          >
             <label tabIndex={0} className="btn btn-ghost btn-circle -mr-3">
               <div className="indicator">
                 <AiOutlineShoppingCart size={22} />
@@ -161,20 +172,6 @@ const Navbar = () => {
                 </span>
               </div>
             </label>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg text-gray-700">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle -mr-2">
@@ -206,6 +203,9 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+
+        {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+        {openWishlist ? <Wishlist setOpenWishlist={setOpenWishlist} /> : null}
       </div>
     </div>
   );

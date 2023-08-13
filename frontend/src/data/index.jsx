@@ -428,7 +428,7 @@ export const productData = [
       },
       {
         public_id: "test",
-        url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjonthfv0vfyKM48uVr1WsTNB5q_ESLQbqOg&usqp=CAU",
       },
     ],
     shop: {
@@ -471,7 +471,7 @@ export const productData = [
       },
     ],
     shop: {
-      name: "Shahriar Watch House",
+      name: "Umar Watch House",
       shop_avatar: {
         public_id: "test",
         url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
@@ -496,7 +496,7 @@ export const productData = [
       },
       {
         public_id: "test",
-        url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjonthfv0vfyKM48uVr1WsTNB5q_ESLQbqOg&usqp=CAU",
       },
     ],
     shop: {
@@ -564,7 +564,7 @@ export const productData = [
       },
       {
         public_id: "test",
-        url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjonthfv0vfyKM48uVr1WsTNB5q_ESLQbqOg&usqp=CAU",
       },
     ],
     shop: {
