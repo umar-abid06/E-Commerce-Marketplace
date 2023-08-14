@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { productData } from "../../data";
 
+import SuggestedProducts from "../../components/suggested-products";
 import ProductDetails from "../../components/product-details";
 
 const ProductDetailsPage = () => {
@@ -17,6 +18,7 @@ const ProductDetailsPage = () => {
   return (
     <>
       <ProductDetails data={data} />
+      {data && <SuggestedProducts data={data} />}
     </>
   );
 };

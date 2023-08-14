@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { useNavigation, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "../../assets/styles";
 import {
   AiFillHeart,
@@ -18,10 +18,20 @@ const ProductDetails = ({ data }) => {
 
   console.log(data);
 
-  //   const navigation = useNavigation();
+  const navigate = useNavigate();
 
-  const incrementCount = () => {};
-  const decrementCount = () => {};
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+  const decrementCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  const handleMessageSubmit = () => {
+    navigate("/inbox?converstaion=507ebjver884ehfdjeriv84");
+  };
 
   //   const totalReviewsLength =
   //     productData &&
@@ -143,7 +153,7 @@ const ProductDetails = ({ data }) => {
                 <div className="flex items-center pt-8">
                   <Link to={`/shop/preview/${data?.shop._id}`}>
                     <img
-                      src={`${data?.shop?.avatar?.url}`}
+                      src={`${data?.shop?.shop_avatar?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
@@ -155,13 +165,12 @@ const ProductDetails = ({ data }) => {
                       </h3>
                     </Link>
                     <h5 className="pb-3 text-[15px]">
-                      {/* ({averageRating}/5) */}
-                      Ratings
+                      {/* ({averageRating}/5) */}({data.shop.ratings}) Ratings
                     </h5>
                   </div>
                   <div
                     className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
-                    // onClick={handleMessageSubmit}
+                    onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
                       Send Message <AiOutlineMessage className="ml-1" />

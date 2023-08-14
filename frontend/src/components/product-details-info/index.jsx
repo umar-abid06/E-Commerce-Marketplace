@@ -7,7 +7,7 @@ const ProductDetailsInfo = ({
   data,
   products,
   totalReviewsLength,
-  averageRating,
+  // averageRating,
 }) => {
   const [active, setActive] = useState(1);
 
@@ -63,30 +63,10 @@ const ProductDetailsInfo = ({
       ) : null}
 
       {active === 2 ? (
-        <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
-          {data &&
-            data.reviews.map((item, index) => (
-              <div className="w-full flex my-2" key={index}>
-                <img
-                  src={`${item.user.avatar?.url}`}
-                  alt=""
-                  className="w-[50px] h-[50px] rounded-full"
-                />
-                <div className="pl-2 ">
-                  <div className="w-full flex items-center">
-                    <h1 className="font-[500] mr-3">{item.user.name}</h1>
-                    {/* <Ratings rating={data?.ratings} /> */}
-                  </div>
-                  <p>{item.comment}</p>
-                </div>
-              </div>
-            ))}
-
-          <div className="w-full flex justify-center">
-            {data && data.reviews.length === 0 && (
-              <h5>No Reviews have for this product!</h5>
-            )}
-          </div>
+        <div className="w-full flex justify-center min-h-[40vh] items-center">
+          <h5>No Reviews have for this product!</h5>
+          {/* {data && data.reviews.length === 0 && (
+          )} */}
         </div>
       ) : null}
 
@@ -96,36 +76,40 @@ const ProductDetailsInfo = ({
             <Link to={`/shop/preview/${data.shop._id}`}>
               <div className="flex items-center">
                 <img
-                  src={`${data?.shop?.avatar?.url}`}
+                  src={`${data?.shop?.shop_avatar?.url}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />
                 <div className="pl-3">
                   <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
                   <h5 className="pb-2 text-[15px]">
-                    ({averageRating}/5) Ratings
+                    {/* ({averageRating}/5) */}
+                    (4.5/5) Ratings
                   </h5>
                 </div>
               </div>
             </Link>
-            <p className="pt-2">{data.shop.description}</p>
+            <p className="pt-2">
+              {/* {data.shop.description} */}A very nice and biggest store with
+              100k+ successful orders.
+            </p>
           </div>
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
             <div className="text-left">
               <h5 className="font-[600]">
-                Joined on:{" "}
+                Joined on:{"14-Aug-2022"}
                 <span className="font-[500]">
                   {data.shop?.createdAt?.slice(0, 10)}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Products:{" "}
+                Total Products:{"3500 "}
                 <span className="font-[500]">
                   {products && products.length}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Reviews:{" "}
+                Total Reviews:{"196 "}
                 <span className="font-[500]">{totalReviewsLength}</span>
               </h5>
               <Link to="/">
