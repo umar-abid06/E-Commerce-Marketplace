@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { productData } from "../../data";
 import styles from "../../assets/styles";
 

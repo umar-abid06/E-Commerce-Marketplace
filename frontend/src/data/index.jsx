@@ -371,7 +371,7 @@ export const productData = [
       },
     ],
     shop: {
-      name: "Shahriar Watch House",
+      name: "Diners' Watch House",
       shop_avatar: {
         public_id: "test",
         url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
@@ -402,7 +402,7 @@ export const productData = [
       },
     ],
     shop: {
-      name: "Alisha Shoes Mart",
+      name: "Diners' Shoes Mart",
       shop_avatar: {
         public_id: "test",
         url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",

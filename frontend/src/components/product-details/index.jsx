@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../../assets/styles";
 import {
@@ -9,7 +9,6 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import ProductDetailsInfo from "../product-details-info";
-import { productData } from "../../data";
 
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);

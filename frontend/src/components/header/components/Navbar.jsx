@@ -188,15 +188,12 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-gray-700"
             >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
+              <Link to="/profile">
+                <li>
+                  <a className="justify-between">Profile Settings</a>
+                </li>
+              </Link>
+
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
