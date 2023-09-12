@@ -10,7 +10,7 @@ const ProductsPage = () => {
   const categoryData = searchParams.get("category");
 
   useEffect(() => {
-    if (categoryData == null) {
+    if (categoryData === null) {
       const d =
         productData && productData.sort((a, b) => b.total_sell - a.total_sell);
       setData(d);

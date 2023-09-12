@@ -9,6 +9,7 @@ import EventsPage from "./pages/Events";
 import FAQPage from "./pages/FAQ";
 import ProductDetailsPage from "./pages/Product-Details";
 import ProfilePage from "./pages/Profile";
+import ShopCreate from "./pages/Shop-Create";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Login = React.lazy(() => import("./pages/Login"));
@@ -32,6 +33,7 @@ const Router = () => {
         <Route element={<Login />} path="/login" />
         <Route element={<Register />} path="/register" />
         <Route element={<AccountActivation />} path="/activation" />
+        <Route element={<ShopCreate />} path="/shop-create" />
       </Routes>
     </Suspense>
   );

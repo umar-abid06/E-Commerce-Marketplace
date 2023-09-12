@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL, userLogin, userRegistration, path } from "./constants";
+import { productData } from "../data";
 
 const API = axios.create({
   baseURL: BASE_URL,
@@ -26,4 +27,20 @@ const signup = async (payload) => {
   }
 };
 
-export { login, signup };
+const getProducts = async () => {
+  // try {
+  //   const { data } = await API.post(`${path}/${userLogin}`, payload);
+  //   return data;
+  // } catch (error) {
+  //   return error.response.data;
+  // }
+  const allProducts = {
+    status: "SUCCESS",
+    data: productData,
+    message: "Products Data!",
+  };
+  console.log(allProducts);
+  return { status: "SUCCESS", data: productData, message: "Products Data!" };
+};
+
+export { login, signup, getProducts };

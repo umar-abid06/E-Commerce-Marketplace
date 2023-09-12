@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div
       className={`navbar text-primary-content ${
-        active ? "shadow-sm fixed top-0 left-0 z-10 bg-success" : "bg-primary "
+        active ? "shadow-sm fixed top-0 left-0 z-10 bg-success" : "bg-primary"
       }`}
     >
       <div className={`navbar ${active ? "text-white" : null}`}>
