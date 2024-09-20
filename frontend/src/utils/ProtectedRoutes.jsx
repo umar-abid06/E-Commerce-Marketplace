@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -7,8 +7,8 @@ import Footer from "../components/footer";
 // import Footer from "../components/Footer";
 
 const ProtectedRoutes = () => {
-  // const isToken = useSelector((state) => state.userLogin.token);
-  const isToken = true;
+  const isToken = useSelector((state) => state.userLogin.token);
+  // const isToken = true;
   return isToken ? (
     <>
       <Header />

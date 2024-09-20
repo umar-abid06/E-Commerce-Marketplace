@@ -1,4 +1,4 @@
-const BASE_URL = "http://192.168.0.151:8000";
+const BASE_URL = "http://10.48.97.0:8000";
 const path = "/api/v1";
 
 const userRegistration = "/auth/register";

@@ -12,7 +12,7 @@ const API = axios.create({
 
 const login = async (payload) => {
   try {
-    const { data } = await API.post(`${path}/${userLogin}`, payload);
+    const { data } = await API.post(`${path}${userLogin}`, payload);
     return data;
   } catch (error) {
     return error.response.data;
@@ -20,7 +20,7 @@ const login = async (payload) => {
 };
 const signup = async (payload) => {
   try {
-    const { data } = await API.post(`${path}/${userRegistration}`, payload);
+    const { data } = await API.post(`${path}${userRegistration}`, payload);
     return data;
   } catch (error) {
     return error.response.data;

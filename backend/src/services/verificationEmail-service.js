@@ -20,7 +20,7 @@ async function sendVerificationEmail(_id, email) {
       console.log(success, " Ready for Messages");
     }
   });
-  const currentUrl = `http://192.168.0.151:${process.env.PORT}/api/v1/auth/register`;
+  const currentUrl = `http://10.48.97.0:${process.env.PORT}/api/v1/auth/register`;
 
   const uniqueString = uuidv4() + _id;
   let mailOptions = {
