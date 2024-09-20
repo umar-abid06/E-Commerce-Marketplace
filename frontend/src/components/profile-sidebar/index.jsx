@@ -18,16 +18,15 @@ const ProfileSidebar = ({ active, setActive }) => {
   };
 
   return (
-    <div className="px-5 md:px-12 lg:px-16 bg-white shadow-sm rounded-[10px] p-4 lg:p-4 pt-4 md:pt-8 lg:pt-10">
+    // <div className=" px-5 md:px-12 lg:px-16 bg-white shadow-sm rounded-[10px] p-4 lg:p-4 pt-4 md:pt-8 lg:pt-10">
+    <div className=" px-2 w-full  md:w-[200px]  lg:w-[250px] bg-white shadow-sm rounded-[10px] md:pl-4 lg:pl-4 py-4 md:py-8 lg:py-10">
       <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(1)}
       >
         <RxPerson size={20} color={active === 1 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 1 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 1 ? "text-[red]" : ""} md:block hidden`}
         >
           Profile
         </span>
@@ -38,9 +37,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <HiOutlineShoppingBag size={20} color={active === 2 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 2 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 2 ? "text-[red]" : ""} md:block hidden`}
         >
           Orders
         </span>
@@ -51,9 +48,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <HiOutlineReceiptRefund size={20} color={active === 3 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 3 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 3 ? "text-[red]" : ""} md:block hidden`}
         >
           Refunds
         </span>
@@ -65,9 +60,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <AiOutlineMessage size={20} color={active === 4 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 4 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 4 ? "text-[red]" : ""} md:block hidden`}
         >
           Inbox
         </span>
@@ -79,9 +72,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <MdOutlineTrackChanges size={20} color={active === 5 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 5 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 5 ? "text-[red]" : ""} md:block hidden`}
         >
           Track Order
         </span>
@@ -93,9 +84,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <RiLockPasswordLine size={20} color={active === 6 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 6 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 6 ? "text-[red]" : ""} md:block hidden`}
         >
           Change Password
         </span>
@@ -107,9 +96,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <TbAddressBook size={20} color={active === 7 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 7 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 7 ? "text-[red]" : ""} md:block hidden`}
         >
           Address
         </span>
@@ -141,9 +128,7 @@ const ProfileSidebar = ({ active, setActive }) => {
       >
         <AiOutlineLogin size={20} color={active === 8 ? "red" : ""} />
         <span
-          className={`pl-3 ${
-            active === 8 ? "text-[red]" : ""
-          } 800px:block hidden`}
+          className={`pl-3 ${active === 8 ? "text-[red]" : ""} md:block hidden`}
         >
           Log out
         </span>

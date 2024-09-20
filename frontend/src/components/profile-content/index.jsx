@@ -16,7 +16,7 @@ import { MdOutlineTrackChanges } from "react-icons/md";
 
 const ProfileContent = ({ active }) => {
   return (
-    <div className="w-full">
+    <div className="w-full ml-2 md:ml-4 lg:ml-6">
       {/* Profile Section */}
       {active === 1 && (
         <div>
